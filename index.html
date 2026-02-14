@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Valentine Surprise</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#ffe6eb;
+    font-family:Arial;
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+    overflow:hidden;
+}
+h1 {
+    font-size:6vw;
+}
+button {
+    padding:15px 30px;
+    margin:10px;
+    font-size:18px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+#yes {
+    background:#ff4d6d;
+    color:white;
+}
+#no {
+    background:#ccc;
+    position:absolute;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-120vh);
+        opacity:0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="question">Jiyanshi, Will you be my Valentine? ❤️</h1>
+
+<div>
+<button id="yes">Yes 💖</button>
+<button id="no">No 😢</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+function moveButton() {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 80);
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+// Desktop hover
+noBtn.addEventListener("mouseenter", moveButton);
+
+// Mobile touch
+noBtn.addEventListener("touchstart", function(e){
+    e.preventDefault();
+    moveButton();
+});
+
+// YES click
+yesBtn.addEventListener("click", function() {
+    document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#ffe6eb;flex-direction:column;overflow:hidden;">
+        <img src="https://raw.githubusercontent.com/amitconvex/Jiyanshi/220a89589210cd8dc1cc2a0e8d35303c4924d277/WhatsApp%20Image%202026-02-14%20at%202.46.56%20PM.jpeg" style="width:90%;max-width:400px;border-radius:20px;">
+    </div>
+    `;
+
+    for(let i=0;i<25;i++){
+        let heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.style.position = "fixed";
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.top = "100vh";
+        heart.style.fontSize = "24px";
+        heart.style.animation = "floatUp 3s linear forwards";
+        document.body.appendChild(heart);
+    }
+});
+</script>
+
+</body>
+</html>
 
